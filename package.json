@@ -1,14 +1,17 @@
 {
-  "name": "software-testing-assignment",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no tests are implemented yet \" && exit 1"
-  },
-  "author": "",
-  "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {}
+	"name": "software-testing-assignment",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"test": "jest"
+	},
+	"author": "",
+	"license": "MIT",
+	"devDependencies": {
+		"@babel/preset-env": "^7.16.4",
+		"babel-jest": "^27.3.1",
+		"jest": "^27.3.1"
+	}
 }
