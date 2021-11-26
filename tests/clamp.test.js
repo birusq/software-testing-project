@@ -29,6 +29,7 @@ const negative = -20.50;
 
 describe("clamp", () => {
 	test.each([
+		[0, negative, positive, 0],
 		[0, negative, negative, negative],
 		[0, positive, positive, positive],
 		[0, NaN, NaN, 0],
