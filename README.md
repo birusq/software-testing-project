@@ -1,3 +1,6 @@
+[![Build Status](https://app.travis-ci.com/birusq/software-testing-project.svg?branch=main)](https://app.travis-ci.com/birusq/software-testing-project)
+[![Coverage Status](https://coveralls.io/repos/github/birusq/software-testing-project/badge.svg?branch=main)](https://coveralls.io/github/birusq/software-testing-project?branch=main)
+
 # Student template
 
 ## Purpose of this repository
