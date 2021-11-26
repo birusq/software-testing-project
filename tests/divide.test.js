@@ -1,48 +1,64 @@
 import divide from "../src/divide"
 
 /*
-	Different situations:
-	Floating point inaccuracies will be skipped.
-	integer vs decimal number values
-	even though the data type should be Number.
-	division by the number itself
-	inputs:
-		numerator:
-			positive numbers,
-			negative numbers,
-			numbers between abs(]0, 1[),
-			0 and 1
-		denominator:
-			-,-
-	outputs:
-		quotient:
-			-,-
-
+	Equivalence classes to test for both numerator and denominator:
+		- NaN
+		- zero
+		- positive number
+		- negative number
+		- negative infinity
+		- positive infinity
+	As there are two arguments that accept numbers, 
+	all combinations of these classes are tested.
+	Correct results are assumed to be the same as the results from "/"-operator.
 */
 
+const positiveNum = 10.25;
+const negativeNum = -20.50;
+
 describe("divide.test.js", () => {
-	test("+int / +int = +float", () => {
-		expect(divide(6,4)).toStrictEqual(1.5);
+	test.each([
+		[0, positiveNum, 0],
+		[0, negativeNum, 0],
+		[0, Infinity, 0],
+		[0, -Infinity, 0],
+		[positiveNum, positiveNum, 1],
+		[positiveNum, negativeNum, -0.5],
+		[positiveNum, Infinity, 0],
+		[positiveNum, -Infinity, 0],
+		[positiveNum, 0, Infinity],
+		[negativeNum, positiveNum, 0.5],
+		[negativeNum, negativeNum, 1],
+		[negativeNum, Infinity, 0],
+		[negativeNum, -Infinity, 0],
+		[negativeNum, 0, Infinity],
+		[Infinity, 0, Infinity],
+		[Infinity, positiveNum, Infinity],
+		[Infinity, negativeNum, Infinity],
+		[-Infinity, 0, -Infinity],
+		[-Infinity, positiveNum, -Infinity],
+		[-Infinity, negativeNum, Infinity],
+	])("divide(%d, %d)", (a, b, expected) => {
+		expect(divide(a, b)).toStrictEqual(expected);
 	});
-	test("-int / +int = -float", () => {
-		expect(divide(-2, 4)).toStrictEqual(-0.5);
-	});
-	test("+smallFloat / -smallFloat", () => {
-		expect(divide(0.25, -0.125)).toStrictEqual(-2);
-	});
-	test("-float / -smallFloat", () => {
-		expect(divide(402.7, 0.222)).toStrictEqual(1814);
-	});
-	test("+float / 0", () => {
-		expect(divide(1.237, 0)).toStrictEqual(Infinity);
-	});
-	test("-int / -0", () => {
-		expect(divide(-3333, -0.0)).toStrictEqual(-Infinity);
-	});
-	test("0 / 0", () => {
-		expect(divide(0, 0)).toBeNaN();
-	});
-	test("Division by itself", () => {
-		expect(divide(-1.3333, -1.3333)).toStrictEqual(1);
+
+	test.each([
+		[0, 0],
+		[Infinity, Infinity],
+		[Infinity, -Infinity],
+		[-Infinity, Infinity],
+		[-Infinity, -Infinity],
+		[NaN, 0],
+		[NaN, positiveNum],
+		[NaN, negativeNum],
+		[NaN, Infinity],
+		[NaN, -Infinity],
+		[0, NaN],
+		[positiveNum, NaN],
+		[negativeNum, NaN],
+		[Infinity, NaN],
+		[-Infinity, NaN],
+	])("divide(%d, %d)", (a, b) => {
+		expect(divide(a, b)).toBeNaN();
 	});
 })
