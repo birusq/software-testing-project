@@ -6,7 +6,7 @@
 	"type": "module",
 	"scripts": {
 		"test": "jest",
-		"lint": "eslint . ; exit 0"
+		"lint": "eslint ."
 	},
 	"author": "",
 	"license": "MIT",
