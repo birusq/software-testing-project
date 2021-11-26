@@ -5,13 +5,15 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-		"test": "jest"
+		"test": "jest",
+		"lint": "eslint ."
 	},
 	"author": "",
 	"license": "MIT",
 	"devDependencies": {
 		"@babel/preset-env": "^7.16.4",
 		"babel-jest": "^27.3.1",
+		"eslint": "^8.3.0",
 		"jest": "^27.3.1"
 	}
 }
