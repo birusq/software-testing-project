@@ -1,4 +1,5 @@
 import at from "../src/at"
+import {object, arrayObject, objectMess} from "./jsobjects.js"
 
 
 /*
@@ -16,59 +17,6 @@ import at from "../src/at"
 	different value (data) types
 */
 describe("at.test.js", () => {
-	const objectMess = {
-		mess1: {
-			mess2: {
-				mess3: {
-					mess4: {
-						value: "it works"
-					}
-				}
-			}
-		}
-	}
-	const arrayObject = [
-		[
-			[false],
-			[
-				[
-					"maybe"
-				],
-				[
-					[
-						objectMess
-					],
-					{
-						mess: objectMess
-					}
-				]
-			]
-		],
-	];
-	const object = {
-		level1String: "yksi",
-		level1Array: [
-			undefined,
-			3,
-			false,
-			"peanuts",
-			[
-				null,
-				NaN
-			],
-			{
-				level3Object: {
-					number: 42.3,
-					kammotus: arrayObject
-				}
-			}
-		],
-		level1Object: {
-			itWorks: false,
-			kammotus: arrayObject
-		}
-	};
-
 	test("at(object, 'level1String') i.e. object.stringValue", () => {
 		expect(at(object, "level1String")).toStrictEqual(["yksi"]);
 	});
