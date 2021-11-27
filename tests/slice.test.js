@@ -44,10 +44,6 @@ describe("slice.test.js", () => {
 
 	const testArray = [1,2,3,4,5,6,7];
 
-	test("slice(testArray, 1, 4)", () => {
-		expect(slice(testArray, 1, 4)).toStrictEqual([2,3,4]);
-	});
-
 	const al = testArray.length;
 	const alp = al+1;
 	const alm = al-1;
