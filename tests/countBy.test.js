@@ -42,10 +42,6 @@ test("object with length one => result with value 1", () => {
 	expect(countBy([{ x: "test" }], o => o.x)).toStrictEqual({ test: 1 });
 });
 
-test("array with length one => result with value 1", () => {
-	expect(countBy({ x: "test" }, prop => prop)).toStrictEqual({ test: 1 });
-});
-
 test("array with length X => result with value X", () => {
 	const X = 10;
 	const testArr = new Array(X).fill({ x: "test" });
