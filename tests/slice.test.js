@@ -26,7 +26,8 @@ import slice from "../src/slice"
 			< 0: -2 and -4.
 
 	Equivalence classes:
-	begin: default, 0, 1, -2, 4, -4, arrlen-1, arrlen, -arrlen, -arrlen-1
+	begin: default, 0, 1, -2, 4, -4, arrlen-1, arrlen, -arrlen, -arrlen-1,
+		(-start > arrlen )
 	end  : default, 0, 1, -2, 4, -4, arrlen+1, arrlen, -arrlen, -arrlen-1
 
 	begin can't be default if end isn't.
@@ -54,6 +55,8 @@ describe("equivalence class combinations", () => {
 	const al = testArray.length;
 	const alp = al+1;
 	const alm = al-1;
+	//	(-start > length)
+	const hns = -3000-al;
 
 	const testCases = [
 		[0, 0, []],
@@ -144,7 +147,17 @@ describe("equivalence class combinations", () => {
 		[-alm, al, [2,3,4,5,6,7]],
 		[-alm, alp, [2,3,4,5,6,7]],
 		[-alm, -al, []],
-		[-alm, -alm, []]
+		[-alm, -alm, []],
+
+		[hns, 0, []],
+		[hns, 1, [1]],
+		[hns, -2, [1,2,3,4,5]],
+		[hns, 4, [1,2,3,4]],
+		[hns, -4, [1,2,3]],
+		[hns, al, testArray],
+		[hns, alp, testArray],
+		[hns, -al, []],
+		[hns, -alm, [1]]
 	];
 
 	test.each(testCases)("slice(testArray, %p, %p) == %p",
