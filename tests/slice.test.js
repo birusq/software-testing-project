@@ -32,7 +32,12 @@ import slice from "../src/slice"
 	begin can't be default if end isn't.
 */
 
-describe("slice.test.js", () => {
+describe("single tests", () => {
+	//	Only exists because of better test coverage.
+	test("slice(null)", () => {
+		expect(slice(null)).toStrictEqual([]);
+	});
+
 	test("slice([])", () => {
 		expect(slice([])).toStrictEqual([]);
 	});
@@ -41,7 +46,9 @@ describe("slice.test.js", () => {
 		const result = slice([{p: 'kala'}, [false], 3], -3, 2);
 		expect(result).toStrictEqual([{p: 'kala'}, [false]]);
 	});
+});
 
+describe("equivalence class combinations", () => {
 	const testArray = [1,2,3,4,5,6,7];
 
 	const al = testArray.length;
@@ -146,29 +153,28 @@ describe("slice.test.js", () => {
 		expect(slicedArray).toStrictEqual(result);
 	});
 
-
-	const defaultTestCases = [
-		[0, testArray],
-		[1, [2,3,4,5,6,7]],
-		[-2, [6,7]],
-		[4, [5,6,7]],
-		[-4, [4,5,6,7]],
-		[alm, [7]],
-		[al, []],
-		[-al, testArray],
-		[-alm, [2,3,4,5,6,7]]
-	];
-
-	test("slice(testArray) == testArray", () => {
-		expect(slice(testArray)).toStrictEqual(testArray);
-	});
-	test.each(defaultTestCases)("slice(testArray, %p) == %p",
-			(begin, result) => {
-		expect(slice(testArray, begin)).toStrictEqual(result);
-	});
-
-
 	// test defaults here, separately
+	describe("with some arguments omitted", () => {
+		const defaultTestCases = [
+			[0, testArray],
+			[1, [2,3,4,5,6,7]],
+			[-2, [6,7]],
+			[4, [5,6,7]],
+			[-4, [4,5,6,7]],
+			[alm, [7]],
+			[al, []],
+			[-al, testArray],
+			[-alm, [2,3,4,5,6,7]]
+		];
 
+		test("slice(testArray) == testArray", () => {
+			expect(slice(testArray)).toStrictEqual(testArray);
+		});
+		test.each(defaultTestCases)("slice(testArray, %p) == %p",
+				(begin, result) => {
+			expect(slice(testArray, begin)).
+					toStrictEqual(result);
+		});
+	});
 });
 
